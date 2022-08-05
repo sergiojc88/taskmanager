@@ -1,6 +1,7 @@
 ## Installing application
 
-- Unzip on root server.
+- Unzip the file on root server or run git clone of https://github.com/sergiojc88/taskmanager.git.
 - create database: taskmanager.
 - run: composer install.
+- run the migrations: php artisan migrate.
 - Done.
