@@ -20,23 +20,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($tasks as $task )
-                        <tr id="{{ $task->id }}">
-                            <td>{{ $task->id }}</td>
-                            <td>{{ $task->name }}</td>
-                            <td>{{ $task->priority }}</td>
-                            <td>
-                            <div class="d-flex">
-                                <a class="btn btn-primary" style="margin-bottom: 16px;margin-right: 5px;" href="{{ url('/task/'.$task->id.'/edit' ) }}">EDIT</a>
-                                <form action="{{ url('/task/'.$task->id) }}" method="POST">
-                                @csrf
-                                {{ method_field('DELETE') }}
-                                    <input class="btn btn-primary" type="submit" value="DELETE"/>
-                                </form>
-                            </div>
-                            </td>
+                    @if(isset($tasks))
+                        @foreach ($tasks as $task )
+                            <tr id="{{ $task->id }}">
+                                <td>{{ $task->id }}</td>
+                                <td>{{ $task->name }}</td>
+                                <td>{{ $task->priority }}</td>
+                                <td>
+                                <div class="d-flex">
+                                    <a class="btn btn-primary" style="margin-bottom: 16px;margin-right: 5px;" href="{{ url('/task/'.$task->id.'/edit' ) }}">EDIT</a>
+                                    <form action="{{ url('/task/'.$task->id) }}" method="POST">
+                                    @csrf
+                                    {{ method_field('DELETE') }}
+                                        <input class="btn btn-primary" type="submit" value="DELETE"/>
+                                    </form>
+                                </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="4">No records</td>
                         </tr>
-                    @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -53,10 +59,7 @@
                             $(this).attr('data-previndex', ui.item.index());
                         },
                         update: function(event, ui) {
-                            //$.post("/taskManager/public/task/" + {{ $task->id }} + '/edit', function(data){
-                            //})
                             var parametros = {
-
                                 "priority" : ui.item.index(),
                                 "old_priority" : $(this).attr('data-previndex')
                             };

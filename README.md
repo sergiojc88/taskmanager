@@ -4,4 +4,4 @@
 - create database: taskmanager.
 - run: composer install.
 - run the migrations: php artisan migrate.
-- Done.
+- Go to http://localhost/taskManager/public/ on the browser or run: php artisan serve.
